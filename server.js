@@ -9,10 +9,9 @@ const nextHandler = nextApp.getRequestHandler();
 
 let port = 3000;
 
-let mensajes = [{contenido: "empezá a chatear"}];
+let mensajes = [{ contenido: "empezá a chatear" }];
 
 io.on("connect", (socket) => {
-
   socket.emit("mensaje-del-servidor", mensajes);
 
   socket.on("mensaje-del-cliente", (msj) => {
@@ -32,5 +31,5 @@ nextApp.prepare().then(() => {
 
 server.listen(port, (err) => {
   if (err) throw err;
-  console.log(`listo el pollo en puerto http://localhost:${port}`);
+  console.log(`listo el pollo y pelada la gallina en puerto http://localhost:${port}`);
 });

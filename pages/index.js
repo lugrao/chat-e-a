@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 const socket = io();
 
 export default function App(msjs) {
-  const [mensajes, setMensajes] = useState([{}]);
+  const [mensajes, setMensajes] = useState([{ contenido: "a ver che" }]);
   const [nuevoMensaje, setNuevoMensaje] = useState({ contenido: "" });
   const [enviado, setEnviado] = useState(false);
   const [refresh, setRefresh] = useState(false);
