@@ -10,7 +10,7 @@ export default function App(msjs) {
   const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {
-    fetch("http://localhost:3000/mensajes").then(async (res) => {
+    fetch("https://shrouded-journey-38214.herokuapp.com/mensajes").then(async (res) => {
       const msjs = await res.json();
       setMensajes(msjs);
     });
@@ -52,7 +52,7 @@ export default function App(msjs) {
 }
 
 App.getInitialProps = async (ctx) => {
-  const res = await fetch("http://localhost:3000/mensajes");
+  const res = await fetch("https://shrouded-journey-38214.herokuapp.com/mensajes");
   const json = await res.json();
   return { msjs: json };
 };
