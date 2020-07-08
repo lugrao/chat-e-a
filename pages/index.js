@@ -8,6 +8,8 @@ const url = dev
   ? "http://localhost:3000"
   : "https://chat-nextjs.vercel.app";
 
+  //URL de Heroku: "https://shrouded-journey-38214.herokuapp.com"
+
 export default function App(msjs) {
   const [mensajes, setMensajes] = useState([{ contenido: "a ver che" }]);
   const [nuevoMensaje, setNuevoMensaje] = useState({ contenido: "" });
