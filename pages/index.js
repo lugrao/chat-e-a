@@ -7,11 +7,9 @@ const dev = process.env.NODE_ENV !== "production";
 const url = dev ? "http://localhost:3000" : "https://chat-nextjs.herokuapp.com";
 
 export default function App(msjs) {
-  // const [mensajes, setMensajes] = useState([{ contenido: "empezá a chatear" }]);
   const [mensajes, setMensajes] = useState([msjs]);
   const [nuevoMensaje, setNuevoMensaje] = useState({ contenido: "" });
   const [enviado, setEnviado] = useState(false);
-  const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {
     fetch(`${url}/mensajes`).then(async (res) => {
@@ -32,9 +30,6 @@ export default function App(msjs) {
   }
   function capturarValor(event) {
     setNuevoMensaje({ contenido: event.target.value });
-  }
-  function recargar() {
-    setRefresh(!refresh);
   }
 
   return (
