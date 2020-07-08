@@ -6,7 +6,7 @@ const socket = io();
 const dev = process.env.NODE_ENV !== "production";
 const url = dev
   ? "http://localhost:3000"
-  : "https://shrouded-journey-38214.herokuapp.com";
+  : "https://chat-nextjs.vercel.app";
 
 export default function App(msjs) {
   const [mensajes, setMensajes] = useState([{ contenido: "a ver che" }]);
