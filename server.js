@@ -9,7 +9,7 @@ const nextHandler = nextApp.getRequestHandler();
 
 let port = process.env.PORT || 3000;
 
-let mensajes = [{ contenido: `puerto ${port}` }];
+let mensajes = [{ contenido: "empezá a chatear" }];
 
 io.on("connect", (socket) => {
   socket.emit("mensaje-del-servidor", mensajes);

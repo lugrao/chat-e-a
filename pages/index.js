@@ -9,8 +9,7 @@ const url = dev
   : "https://chat-nextjs.herokuapp.com/";
 
 export default function App(msjs) {
-  // const [mensajes, setMensajes] = useState([{ contenido: "a ver che" }]);
-  const [mensajes, setMensajes] = useState([msjs]);
+  const [mensajes, setMensajes] = useState([{ contenido: "empezá a chatear" }]);
   const [nuevoMensaje, setNuevoMensaje] = useState({ contenido: "" });
   const [enviado, setEnviado] = useState(false);
   const [refresh, setRefresh] = useState(false);
@@ -57,8 +56,8 @@ export default function App(msjs) {
   );
 }
 
-App.getInitialProps = async (ctx) => {
-  const res = await fetch(`${url}/mensajes`);
-  const json = await res.json();
-  return { msjs: json };
-};
+// App.getInitialProps = async (ctx) => {
+//   const res = await fetch(`${url}/mensajes`);
+//   const json = await res.json();
+//   return { msjs: json };
+// };
