@@ -3,6 +3,11 @@ import { useState, useEffect } from "react";
 
 const socket = io();
 
+const dev = process.env.NODE_ENV !== "production";
+const url = dev
+  ? "http://localhost:3000"
+  : "https://shrouded-journey-38214.herokuapp.com/";
+
 export default function App(msjs) {
   const [mensajes, setMensajes] = useState([{ contenido: "a ver che" }]);
   const [nuevoMensaje, setNuevoMensaje] = useState({ contenido: "" });
@@ -10,7 +15,7 @@ export default function App(msjs) {
   const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {
-    fetch("https://shrouded-journey-38214.herokuapp.com/mensajes").then(async (res) => {
+    fetch(`${url}/mensajes`).then(async (res) => {
       const msjs = await res.json();
       setMensajes(msjs);
     });
@@ -52,7 +57,9 @@ export default function App(msjs) {
 }
 
 App.getInitialProps = async (ctx) => {
-  const res = await fetch("https://shrouded-journey-38214.herokuapp.com/mensajes");
+  const res = await fetch(
+    "https://shrouded-journey-38214.herokuapp.com/mensajes"
+  );
   const json = await res.json();
   return { msjs: json };
 };
