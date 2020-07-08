@@ -31,5 +31,5 @@ nextApp.prepare().then(() => {
 
 server.listen(port, (err) => {
   if (err) throw err;
-  console.log(`listo el pollo y pelada la gallina en http://localhost:${port}`);
+  console.log(`listo el pollo y pelada la gallina en el puerto ${port}`);
 });
