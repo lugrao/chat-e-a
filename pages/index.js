@@ -1,32 +1,26 @@
 import io from "socket.io-client";
 import { useState, useEffect } from "react";
 
-const socket = io();
+// const socket = io();
 
 const dev = process.env.NODE_ENV !== "production";
 const url = dev ? "http://localhost:3000" : "https://chat-nextjs.herokuapp.com";
+const socket = io(url);
 
-export default function App(msjs) {
-  const [mensajes, setMensajes] = useState([msjs]);
+export default function App() {
+  const [mensajes, setMensajes] = useState([]);
   const [nuevoMensaje, setNuevoMensaje] = useState({ contenido: "" });
-  const [enviado, setEnviado] = useState(false);
 
   useEffect(() => {
-    fetch(`${url}/mensajes`).then(async (res) => {
-      const msjs = await res.json();
+    socket.on("mensaje-del-servidor", (msjs) => {
       setMensajes(msjs);
     });
-
-    if (enviado) {
-      socket.emit("mensaje-del-cliente", nuevoMensaje);
-      setNuevoMensaje({ contenido: "" });
-      setEnviado(false);
-    }
   });
 
-  function enviar() {
+  function enviar(event) {
     event.preventDefault();
-    setEnviado(true);
+    socket.emit("mensaje-del-cliente", nuevoMensaje);
+    setNuevoMensaje({ contenido: "" });
   }
   function capturarValor(event) {
     setNuevoMensaje({ contenido: event.target.value });
@@ -50,8 +44,8 @@ export default function App(msjs) {
   );
 }
 
-App.getInitialProps = async (ctx) => {
-  const res = await fetch(`${url}/mensajes`);
-  const json = await res.json();
-  return { msjs: json };
-};
+// App.getInitialProps = async (ctx) => {
+//   const res = await fetch(`${url}/mensajes`);
+//   const json = await res.json();
+//   return { msjs: json };
+// };
