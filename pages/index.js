@@ -122,9 +122,3 @@ export default function App() {
     </div>
   );
 }
-
-// App.getInitialProps = async (ctx) => {
-//   const res = await fetch(`${url}/mensajes`);
-//   const json = await res.json();
-//   return { msjs: json };
-// };

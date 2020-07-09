@@ -1,7 +1,0 @@
-{
-    "name": "chat-nextjs",
-    "alias": "chat-nextjs.vercel.app",
-    "env": {
-      "NODE_ENV": "production"
-    }
-  }
