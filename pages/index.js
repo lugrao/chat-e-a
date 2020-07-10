@@ -20,7 +20,7 @@ export default function App() {
 
   function enviar(event) {
     event.preventDefault();
-    if (nuevoMensaje.contenido != "") {
+    if (/\S/.test(nuevoMensaje.contenido)) {
       socket.emit("mensaje-del-cliente", nuevoMensaje);
       setNuevoMensaje({ contenido: "" });
     }
@@ -52,7 +52,6 @@ export default function App() {
             <label for="nombre-de-usuario">Nombre de usuario: </label>
             <input
               id="nombre-de-usuario"
-              placeholder="anónimo"
               value={usuario}
               onChange={(e) => {
                 setUsuario(e.target.value);
@@ -61,7 +60,9 @@ export default function App() {
             <button
               onClick={(e) => {
                 e.preventDefault();
-                setInputUsuario(!inputUsuario);
+                if (/\S/.test(e.target.previousSibling.value)) {
+                  setInputUsuario(!inputUsuario);
+                }
               }}
               onSubmit={(e) => {
                 e.preventDefault();
@@ -72,7 +73,9 @@ export default function App() {
           </div>
         ) : (
           <div className="escribir">
-            <label for="mensaje"><b>Mensaje: </b></label>
+            <label for="mensaje">
+              <b>Mensaje: </b>
+            </label>
             <input
               id="mensaje"
               onChange={capturarValor}
