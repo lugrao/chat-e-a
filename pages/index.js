@@ -50,6 +50,7 @@ export default function App() {
         {inputUsuario ? (
           <div className="usuario">
             <label for="nombre-de-usuario">Nombre de usuario: </label>
+            <br></br>
             <input
               id="nombre-de-usuario"
               value={usuario}
@@ -76,6 +77,7 @@ export default function App() {
             <label for="mensaje">
               <b>Mensaje: </b>
             </label>
+            <br></br>
             <input
               id="mensaje"
               onChange={capturarValor}
@@ -107,24 +109,26 @@ export default function App() {
           margin-top: 20px;
           font-weight: bold;
         }
-        .usuario button {
+        .usuario button,
+        .escribir button {
           background-color: #e0d8ff;
-          border-color: gray;
+          border: solid 1px;
+          margin: 5px;
+        }
+        .usuario input {
+          margin-top: 5px;
         }
         .mensajes {
           background-color: white;
           height: 70vh;
-          // max-height: 300px;
           overflow-x: hidden;
         }
         .escribir {
           justify-self: center;
           margin-top: 20px;
         }
-        button {
-          background-color: #fff7ea;
-          border: solid 1px;
-          margin: 0 3px;
+        .escribir input {
+          margin-top: 5px;
         }
       `}</style>
     </div>
