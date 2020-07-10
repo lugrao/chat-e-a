@@ -8,8 +8,8 @@ const socket = io(url);
 export default function App() {
   const [mensajes, setMensajes] = useState([]);
   const [nuevoMensaje, setNuevoMensaje] = useState({ contenido: "" });
-  const [usuario, setUsuario] = useState(false);
-  const [cambiarUsuario, setCambiarUsuario] = useState(false);
+  const [usuario, setUsuario] = useState("anónimo");
+  const [inputUsuario, setInputUsuario] = useState(true);
 
   useEffect(() => {
     socket.on("mensaje-del-servidor", (msjs) => {
@@ -24,10 +24,8 @@ export default function App() {
       socket.emit("mensaje-del-cliente", nuevoMensaje);
       setNuevoMensaje({ contenido: "" });
     }
-    if (usuario === "anónimo") {
-      setUsuario(false);
-    }
   }
+
   function capturarValor(event) {
     if (!usuario) {
       setUsuario("anónimo");
@@ -49,37 +47,43 @@ export default function App() {
             );
           })}
         </div>
-        <div className="usuario">
-          <input
-            placeholder="usuario: anónimo"
-            value={usuario ? usuario : null}
-            disabled={!cambiarUsuario}
-            onChange={(e) => {
-              setUsuario(e.target.value);
-            }}
-          />
-          <input
-            type="button"
-            onClick={(e) => {
-              e.preventDefault();
-              setCambiarUsuario(!cambiarUsuario);
-            }}
-            onSubmit={(e) => {
-              e.preventDefault();
-            }}
-            value={cambiarUsuario ? "aceptar" : "cambiar"}
-          />
-        </div>
-        <div className="escribir">
-          <input
-            onChange={capturarValor}
-            value={nuevoMensaje.contenido}
-            placeholder="mensaje"
-          ></input>
-          <button type="submit" onClick={enviar}>
-            enviar
-          </button>
-        </div>
+        {inputUsuario ? (
+          <div className="usuario">
+            <label for="nombre-de-usuario">Nombre de usuario: </label>
+            <input
+              id="nombre-de-usuario"
+              placeholder="anónimo"
+              value={usuario}
+              onChange={(e) => {
+                setUsuario(e.target.value);
+              }}
+            />
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                setInputUsuario(!inputUsuario);
+              }}
+              onSubmit={(e) => {
+                e.preventDefault();
+              }}
+            >
+              Aceptar
+            </button>
+          </div>
+        ) : (
+          <div className="escribir">
+            <label for="mensaje"><b>Mensaje: </b></label>
+            <input
+              id="mensaje"
+              onChange={capturarValor}
+              value={nuevoMensaje.contenido}
+              placeholder="..."
+            ></input>
+            <button type="submit" onClick={enviar}>
+              enviar
+            </button>
+          </div>
+        )}
       </form>
 
       <style global jsx>{`
