@@ -14,6 +14,7 @@ export default function App() {
   useEffect(() => {
     socket.on("mensaje-del-servidor", (msjs) => {
       setMensajes(msjs);
+      document.getElementById(`mensaje-${msjs.length - 1}`).scrollIntoView();
     });
   });
 
@@ -42,7 +43,7 @@ export default function App() {
         <div className="mensajes">
           {mensajes.map((mensaje, index) => {
             return (
-              <p key={index}>
+              <p key={index} id={"mensaje-" + index}>
                 <b>{mensaje.usuario}:</b> {mensaje.contenido}
               </p>
             );
