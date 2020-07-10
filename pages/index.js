@@ -2,7 +2,7 @@ import io from "socket.io-client";
 import { useState, useEffect } from "react";
 
 const dev = process.env.NODE_ENV !== "production";
-const url = dev ? "http://localhost:3000" : "https://chat-nextjs.herokuapp.com";
+const url = dev ? "http://localhost:3000" : "https://chat-e-a.herokuapp.com/";
 const socket = io(url);
 
 export default function App() {
