@@ -14,6 +14,20 @@ export default function Redactar(props) {
       <button type="submit" onClick={props.click}>
         enviar
       </button>
+      <style jsx>{`
+        .redactar {
+          justify-self: center;
+          margin-top: 20px;
+        }
+        .redactar input {
+          margin-top: 5px;
+        }
+        .redactar button {
+          background-color: #e0d8ff;
+          border: solid 1px;
+          margin: 5px;
+        }
+      `}</style>
     </div>
   );
 }

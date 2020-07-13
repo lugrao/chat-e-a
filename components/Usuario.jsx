@@ -14,8 +14,23 @@ export default function Usuario(props) {
           e.preventDefault();
         }}
       >
-        Aceptar
+        aceptar
       </button>
+      <style jsx>{`
+        .usuario {
+          justify-self: center;
+          margin-top: 20px;
+          font-weight: bold;
+        }
+        .usuario input {
+          margin-top: 5px;
+        }
+        .usuario button {
+          background-color: #fff3b7;
+          border: solid 1px;
+          margin: 5px;
+        }
+      `}</style>
     </div>
   );
 }
