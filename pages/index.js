@@ -6,8 +6,12 @@ const url = dev ? "http://localhost:3000" : "https://chat-e-a.herokuapp.com/";
 const socket = io(url);
 
 export default function App() {
+  const hora = `${new Date().getHours()}:${new Date().getMinutes()}`;
   const [mensajes, setMensajes] = useState([]);
-  const [nuevoMensaje, setNuevoMensaje] = useState({ contenido: "" });
+  const [nuevoMensaje, setNuevoMensaje] = useState({
+    contenido: "",
+    timestamp: hora,
+  });
   const [usuario, setUsuario] = useState("anónimo");
   const [inputUsuario, setInputUsuario] = useState(true);
 
@@ -16,6 +20,7 @@ export default function App() {
       setMensajes(msjs);
       document.getElementById(`mensaje-${msjs.length - 1}`).scrollIntoView();
     });
+    console.log(nuevoMensaje);
   });
 
   function enviar(event) {
@@ -30,7 +35,11 @@ export default function App() {
     if (!usuario) {
       setUsuario("anónimo");
     }
-    setNuevoMensaje({ usuario: usuario, contenido: event.target.value });
+    setNuevoMensaje({
+      usuario: usuario,
+      contenido: event.target.value,
+      timestamp: hora,
+    });
   }
 
   return (
@@ -43,13 +52,14 @@ export default function App() {
             return (
               <p key={index} id={"mensaje-" + index}>
                 <b>{mensaje.usuario}:</b> {mensaje.contenido}
+            <span className="timestamp">{mensaje.timestamp}</span>
               </p>
             );
           })}
         </div>
         {inputUsuario ? (
           <div className="usuario">
-            <label for="nombre-de-usuario">Nombre de usuario: </label>
+            <label htmlFor="nombre-de-usuario">Nombre de usuario: </label>
             <br></br>
             <input
               id="nombre-de-usuario"
@@ -74,7 +84,7 @@ export default function App() {
           </div>
         ) : (
           <div className="escribir">
-            <label for="mensaje">
+            <label htmlFor="mensaje">
               <b>Mensaje: </b>
             </label>
             <br></br>
@@ -122,6 +132,11 @@ export default function App() {
           background-color: white;
           height: 70vh;
           overflow-x: hidden;
+        }
+        .timestamp {
+          color: #cecece;
+          font-size: 11px;
+          margin-left: 8px;
         }
         .escribir {
           justify-self: center;
