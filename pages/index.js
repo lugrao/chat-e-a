@@ -1,5 +1,8 @@
 import io from "socket.io-client";
 import { useState, useEffect } from "react";
+import Usuario from "../components/Usuario";
+import Redactar from "../components/Redactar";
+import Mensajes from "../components/Mensajes";
 
 const dev = process.env.NODE_ENV !== "production";
 const url = dev ? "http://localhost:3000" : "https://chat-e-a.herokuapp.com/";
@@ -20,7 +23,6 @@ export default function App() {
       setMensajes(msjs);
       document.getElementById(`mensaje-${msjs.length - 1}`).scrollIntoView();
     });
-    console.log(nuevoMensaje);
   });
 
   function enviar(event) {
@@ -45,67 +47,40 @@ export default function App() {
   return (
     <div className="app">
       <h1>chat e-a</h1>
-
       <form onSubmit={enviar}>
-        <div className="mensajes">
-          {mensajes.map((mensaje, index) => {
-            return (
-              <p key={index} id={"mensaje-" + index}>
-                <b>{mensaje.usuario}:</b> {mensaje.contenido}
-            <span className="timestamp">{mensaje.timestamp}</span>
-              </p>
-            );
-          })}
-        </div>
+        <Mensajes mensajes={mensajes} />
         {inputUsuario ? (
-          <div className="usuario">
-            <label htmlFor="nombre-de-usuario">Nombre de usuario: </label>
-            <br></br>
-            <input
-              id="nombre-de-usuario"
-              value={usuario}
-              onChange={(e) => {
-                setUsuario(e.target.value);
-              }}
-            />
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                if (/\S/.test(e.target.previousSibling.value)) {
-                  setInputUsuario(!inputUsuario);
-                }
-              }}
-              onSubmit={(e) => {
-                e.preventDefault();
-              }}
-            >
-              Aceptar
-            </button>
-          </div>
+          <Usuario
+            usuario={usuario}
+            click={(e) => {
+              e.preventDefault();
+              if (/\S/.test(e.target.previousSibling.value)) {
+                setInputUsuario(!inputUsuario);
+              }
+            }}
+            change={(e) => {
+              setUsuario(e.target.value);
+            }}
+          />
         ) : (
-          <div className="escribir">
-            <label htmlFor="mensaje">
-              <b>Mensaje: </b>
-            </label>
-            <br></br>
-            <input
-              id="mensaje"
-              onChange={capturarValor}
-              value={nuevoMensaje.contenido}
-              placeholder="..."
-            ></input>
-            <button type="submit" onClick={enviar}>
-              enviar
-            </button>
-          </div>
+          <Redactar
+            change={capturarValor}
+            value={nuevoMensaje.contenido}
+            click={enviar}
+          />
         )}
       </form>
 
       <style global jsx>{`
+        @import url("https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Open+Sans:wght@400;700&display=swap");
+
         body {
-          background-color: #fffcff;
+          font-family: "Open Sans", sans-serif;
+          background-color: #fffaf2;
         }
         h1 {
+          font-family: "Alfa Slab One", cursive;
+          font-weight: normal;
           text-align: center;
         }
         form {
@@ -113,37 +88,6 @@ export default function App() {
           grid-template-columns: 1fr;
           max-width: 600px;
           margin: 5px auto;
-        }
-        .usuario {
-          justify-self: center;
-          margin-top: 20px;
-          font-weight: bold;
-        }
-        .usuario button,
-        .escribir button {
-          background-color: #e0d8ff;
-          border: solid 1px;
-          margin: 5px;
-        }
-        .usuario input {
-          margin-top: 5px;
-        }
-        .mensajes {
-          background-color: white;
-          height: 70vh;
-          overflow-x: hidden;
-        }
-        .timestamp {
-          color: #cecece;
-          font-size: 11px;
-          margin-left: 8px;
-        }
-        .escribir {
-          justify-self: center;
-          margin-top: 20px;
-        }
-        .escribir input {
-          margin-top: 5px;
         }
       `}</style>
     </div>
