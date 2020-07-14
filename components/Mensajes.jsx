@@ -15,6 +15,7 @@ export default function Mensajes(props) {
           height: 70vh;
           overflow-x: hidden;
           padding: 0 20px;
+          border-style: none none none solid;
         }
         .timestamp {
           color: #a5a5a5;
