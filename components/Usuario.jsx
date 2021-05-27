@@ -29,6 +29,8 @@ export default function Usuario(props) {
           background-color: #fff3b7;
           border: solid 1px;
           margin: 5px;
+          height: 33px;
+          border-radius: 3px;
         }
       `}</style>
     </div>

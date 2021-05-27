@@ -26,6 +26,8 @@ export default function Redactar(props) {
           background-color: #e0d8ff;
           border: solid 1px;
           margin: 5px;
+          height: 33px;
+          border-radius: 3px;
         }
       `}</style>
     </div>
