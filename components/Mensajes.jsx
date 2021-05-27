@@ -7,7 +7,7 @@ export default function Mensajes(props) {
             <b>{mensaje.usuario}:</b> {mensaje.contenido}
             <span className="timestamp">{mensaje.timestamp}</span>
           </p>
-        );
+        )
       })}
       <style jsx>{`
         .mensajes {
@@ -24,5 +24,5 @@ export default function Mensajes(props) {
         }
       `}</style>
     </div>
-  );
+  )
 }

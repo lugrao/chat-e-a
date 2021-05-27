@@ -11,7 +11,7 @@ export default function Usuario(props) {
       <button
         onClick={props.click}
         onSubmit={(e) => {
-          e.preventDefault();
+          e.preventDefault()
         }}
       >
         aceptar
@@ -32,5 +32,5 @@ export default function Usuario(props) {
         }
       `}</style>
     </div>
-  );
+  )
 }

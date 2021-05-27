@@ -29,5 +29,5 @@ export default function Redactar(props) {
         }
       `}</style>
     </div>
-  );
+  )
 }

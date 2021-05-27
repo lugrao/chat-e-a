@@ -1,47 +1,47 @@
-import io from "socket.io-client";
-import { useState, useEffect } from "react";
-import Usuario from "../components/Usuario";
-import Redactar from "../components/Redactar";
-import Mensajes from "../components/Mensajes";
+import io from "socket.io-client"
+import { useState, useEffect } from "react"
+import Usuario from "../components/Usuario"
+import Redactar from "../components/Redactar"
+import Mensajes from "../components/Mensajes"
 
-const dev = process.env.NODE_ENV !== "production";
-const url = dev ? "http://localhost:3000" : "https://chat-e-a.herokuapp.com/";
-const socket = io(url);
+const dev = process.env.NODE_ENV !== "production"
+const url = dev ? "http://localhost:3000" : "https://chat-e-a.herokuapp.com/"
+const socket = io(url)
 
 export default function App() {
-  const hora = `${new Date().getHours()}:${new Date().getMinutes()}`;
-  const [mensajes, setMensajes] = useState([]);
+  const hora = `${new Date().getHours()}:${new Date().getMinutes()}`
+  const [mensajes, setMensajes] = useState([])
   const [nuevoMensaje, setNuevoMensaje] = useState({
     contenido: "",
     timestamp: hora,
-  });
-  const [usuario, setUsuario] = useState("anónimo");
-  const [inputUsuario, setInputUsuario] = useState(true);
+  })
+  const [usuario, setUsuario] = useState("anónimo")
+  const [inputUsuario, setInputUsuario] = useState(true)
 
   useEffect(() => {
     socket.on("mensaje-del-servidor", (msjs) => {
-      setMensajes(msjs);
-      document.getElementById(`mensaje-${msjs.length - 1}`).scrollIntoView();
-    });
-  });
+      setMensajes(msjs)
+      document.getElementById(`mensaje-${msjs.length - 1}`).scrollIntoView()
+    })
+  })
 
   function enviar(event) {
-    event.preventDefault();
+    event.preventDefault()
     if (/\S/.test(nuevoMensaje.contenido)) {
-      socket.emit("mensaje-del-cliente", nuevoMensaje);
-      setNuevoMensaje({ contenido: "" });
+      socket.emit("mensaje-del-cliente", nuevoMensaje)
+      setNuevoMensaje({ contenido: "" })
     }
   }
 
   function capturarValor(event) {
     if (!usuario) {
-      setUsuario("anónimo");
+      setUsuario("anónimo")
     }
     setNuevoMensaje({
       usuario: usuario,
       contenido: event.target.value,
       timestamp: hora,
-    });
+    })
   }
 
   return (
@@ -53,13 +53,13 @@ export default function App() {
           <Usuario
             usuario={usuario}
             click={(e) => {
-              e.preventDefault();
+              e.preventDefault()
               if (/\S/.test(e.target.previousSibling.value)) {
-                setInputUsuario(!inputUsuario);
+                setInputUsuario(!inputUsuario)
               }
             }}
             change={(e) => {
-              setUsuario(e.target.value);
+              setUsuario(e.target.value)
             }}
           />
         ) : (
@@ -91,5 +91,5 @@ export default function App() {
         }
       `}</style>
     </div>
-  );
+  )
 }
