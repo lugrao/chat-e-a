@@ -48,7 +48,8 @@ export default function App() {
   return (
     <div className="app">
       <Head>
-        <title>💬 chate-e-a</title>
+        <title>chate-e-a</title>
+        <link rel="icon" href="chat.svg"/>
         <meta name="description" content="Sala de chat." />
       </Head>
       <h1>chat e-a</h1>
