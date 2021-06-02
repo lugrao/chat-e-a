@@ -24,6 +24,7 @@ export default function Usuario(props) {
         }
         .usuario input {
           margin-top: 5px;
+          height: 27px;
         }
         .usuario button {
           background-color: #fff3b7;

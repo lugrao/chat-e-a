@@ -21,6 +21,7 @@ export default function Redactar(props) {
         }
         .redactar input {
           margin-top: 5px;
+          height: 27px;
         }
         .redactar button {
           background-color: #e0d8ff;
