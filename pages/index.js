@@ -1,6 +1,6 @@
 import io from "socket.io-client"
 import { useState, useEffect } from "react"
-import Head from 'next/head'
+import Head from "next/head"
 import Usuario from "../components/Usuario"
 import Redactar from "../components/Redactar"
 import Mensajes from "../components/Mensajes"
@@ -47,9 +47,10 @@ export default function App() {
 
   return (
     <div className="app">
-    <Head>
-      <title>💬 chate-e-a</title>
-    </Head>
+      <Head>
+        <title>💬 chate-e-a</title>
+        <meta name="description" content="Sala de chat." />
+      </Head>
       <h1>chat e-a</h1>
       <form onSubmit={enviar}>
         <Mensajes mensajes={mensajes} />
